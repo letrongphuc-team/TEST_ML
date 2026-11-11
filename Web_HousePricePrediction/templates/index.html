@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Pricing House</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+</head>
+<body>
+    <form method="post">
+        <table border="1">
+            <tr>
+                <td>Avg. Area Income:</td>
+                <td><input type="text" name="area_income_value" id="area_income_value" size="15" /></td>
+            </tr>
+            <tr>
+                <td>Avg. Area House Age:</td>
+                <td><input type="text" name="area_house_age_value" id="area_house_age_value" size="15" /></td>
+            </tr>
+            <tr>
+                <td>Avg. Area Number of Rooms:</td>
+                <td><input type="text" name="area_number_of_rooms_value" id="area_number_of_rooms_value" size="15" /></td>
+            </tr>
+            <tr>
+                <td>Avg. Area Number of Bedrooms:</td>
+                <td><input type="text" name="area_number_of_bedrooms_value" id="area_number_of_bedrooms_value" size="15" /></td>
+            </tr>
+            <tr>
+                <td>Area Population:</td>
+                <td><input type="text" name="area_population_value" id="area_population_value" size="15" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button id="doprediction_button" type="button">Prediction</button>
+                </td>
+            </tr>
+            <tr>
+                <td>House Pricing Prediction:</td>
+                <td><input type="text" name="house_price" id="house_price" size="15" /></td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        $(function(){
+            $('#doprediction_button').click(function(){
+                $.ajax({
+                    url: '/doprediction',
+                    data: $('form').serialize(),
+                    type: 'POST',
+                    success: function(response){
+                        console.log(response);
+                        $('#house_price').val(response);
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
